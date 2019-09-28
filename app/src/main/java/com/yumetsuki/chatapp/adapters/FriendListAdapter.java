@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,8 +27,14 @@ public class FriendListAdapter
 
     private MutableLiveData<List<Friend>> friends;
 
-    public FriendListAdapter(MutableLiveData<List<Friend>> friends) {
+    private Consumer<String> onFriendClick;
+
+    public FriendListAdapter(
+            MutableLiveData<List<Friend>> friends,
+            Consumer<String> onFriendClick
+    ) {
         this.friends = friends;
+        this.onFriendClick = onFriendClick;
     }
 
     @NonNull
@@ -69,6 +76,7 @@ public class FriendListAdapter
         }
 
         public void bind(Friend friend) {
+            itemView.setOnClickListener(view -> onFriendClick.accept(friend.getName()));
             mFriendNameText.setText(friend.getName());
             mRecentMessageText.setText(friend.getRecentMessage());
             mTimeRecentMessageText.setText(getFormatRecentTime(friend.getRecentMessageTime()));

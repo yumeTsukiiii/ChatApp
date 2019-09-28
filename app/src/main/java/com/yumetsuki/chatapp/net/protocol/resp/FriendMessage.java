@@ -10,6 +10,8 @@ public class FriendMessage {
 
     private String content;
 
+    private long time;
+
     public int getId() {
         return id;
     }
@@ -40,5 +42,13 @@ public class FriendMessage {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
     }
 }
