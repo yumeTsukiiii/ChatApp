@@ -11,13 +11,30 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_chat"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                tools:src="@drawable/chat"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/chat"/>
+
+                <TextView
+                    android:id="@+id/title_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="2333"
+                    android:textSize="24sp"
+                    android:layout_marginStart="8dp"/>
+
+            </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
 

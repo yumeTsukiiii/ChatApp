@@ -9,9 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.yumetsuki.chatapp.MainViewModel;
 import com.yumetsuki.chatapp.R;
@@ -69,7 +69,7 @@ public class ContactsTabFragment extends Fragment {
     }
 
     private void initViewModel() {
-        mainViewModel.getFriends().removeObservers(this);
+        mainViewModel.getFriendsMessage().removeObservers(this);
 
         mainViewModel.getFriendsMessage().observe(this, friends -> {
             if (viewModel.getFriendListAdapter() != null) {
@@ -79,7 +79,14 @@ public class ContactsTabFragment extends Fragment {
     }
 
     private void initView() {
-        FriendListAdapter adapter = new FriendListAdapter(mainViewModel.getFriends());
+        FriendListAdapter adapter = new FriendListAdapter(
+                mainViewModel.getFriends(),
+                username -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("username", username);
+                    Navigation.findNavController(requireView()).navigate(R.id.chatFragment, bundle);
+                }
+        );
         viewModel.setFriendListAdapter(adapter);
         mFriendListRecyclerView.setAdapter(adapter);
         mFriendListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

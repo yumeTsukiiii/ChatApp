@@ -19,6 +19,8 @@ import com.yumetsuki.chatapp.MainViewModel;
 import com.yumetsuki.chatapp.R;
 import com.yumetsuki.chatapp.utils.StringUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -59,6 +61,9 @@ public class LoginFragment extends Fragment {
         }
         initViewModel();
         mainViewModel.stopTimer();
+        mainViewModel.getFriends().postValue(new ArrayList<>());
+        mainViewModel.getFriendsMessage().postValue(new HashMap<>());
+        mainViewModel.getFriendRequests().postValue(new ArrayList<>());
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;

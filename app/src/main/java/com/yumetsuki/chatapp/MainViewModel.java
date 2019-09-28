@@ -143,10 +143,9 @@ public class MainViewModel extends ViewModel {
             Map<String, List<FriendMessage>> friendsMessageValue = friendsMessage.getValue();
             responses.forEach(pair -> {
                 List<FriendMessage> messages = friendsMessageValue.get(pair.first);
-                if (messages != null) {
+                if (messages == null) {
                     friendsMessageValue.put(pair.first, pair.second.getData());
                 } else {
-                    if (messages.size() == pair.second.getData().size()) return;
                     friendsMessageValue.put(pair.first, pair.second.getData());
                 }
             });
@@ -173,7 +172,6 @@ public class MainViewModel extends ViewModel {
                         return friend;
                     }).collect(Collectors.toList())
             );
-            if (friendsValue.size() == 0) return;
             friends.postValue(friendsValue);
         } else {
             tip.postValue(

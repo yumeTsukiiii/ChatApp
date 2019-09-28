@@ -4,8 +4,10 @@ import com.yumetsuki.chatapp.net.RxRetrofit;
 import com.yumetsuki.chatapp.net.api.SocialService;
 import com.yumetsuki.chatapp.net.protocol.CommonResponse;
 import com.yumetsuki.chatapp.net.protocol.req.AcceptRequestReq;
+import com.yumetsuki.chatapp.net.protocol.req.AddFriendReq;
 import com.yumetsuki.chatapp.net.protocol.req.DenyRequestReq;
 import com.yumetsuki.chatapp.net.protocol.resp.AcceptRequestMessage;
+import com.yumetsuki.chatapp.net.protocol.resp.AddFriendMessage;
 import com.yumetsuki.chatapp.net.protocol.resp.DenyRequestMessage;
 import com.yumetsuki.chatapp.net.protocol.resp.FriendRequest;
 
@@ -43,5 +45,11 @@ public class SocialRepository {
         DenyRequestReq denyRequestReq = new DenyRequestReq();
         denyRequestReq.setId(requestId);
         return socialService.denyFriendRequest(denyRequestReq);
+    }
+
+    public Observable<CommonResponse<AddFriendMessage>> addFriend(String username) {
+        AddFriendReq req = new AddFriendReq();
+        req.setTo(username);
+        return socialService.addFriend(req);
     }
 }

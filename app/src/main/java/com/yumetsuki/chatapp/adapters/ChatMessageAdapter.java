@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.yumetsuki.chatapp.R;
 import com.yumetsuki.chatapp.net.protocol.resp.FriendMessage;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,7 +43,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ChatMessageViewHolder holder, int position) {
-
+        holder.bind(Objects.requireNonNull(messages.getValue()).get(position));
     }
 
     @Override
@@ -52,7 +53,7 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
 
     @Override
     public int getItemViewType(int position) {
-        return Objects.requireNonNull(messages.getValue()).get(position).getFrom().equals(hostUsername) ? 0 : 1;
+        return Objects.requireNonNull(messages.getValue()).get(position).getFrom().equals(hostUsername) ? 1 : 0;
     }
 
     class ChatMessageViewHolder extends RecyclerView.ViewHolder {
@@ -71,6 +72,13 @@ public class ChatMessageAdapter extends RecyclerView.Adapter<ChatMessageAdapter.
 
         public void bind(FriendMessage message) {
             mMessageTv.setText(message.getContent());
+            mChatMessageTime.setText(buildTimeText(message.getTime()));
+        }
+
+        private String buildTimeText(long time) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(time);
+            return calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
         }
     }
 }
