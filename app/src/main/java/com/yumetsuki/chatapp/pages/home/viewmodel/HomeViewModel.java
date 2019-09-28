@@ -34,7 +34,7 @@ public class HomeViewModel extends ViewModel {
     private void onAddFriend(CommonResponse<AddFriendMessage> response) {
         if (response.getStatus() == 0) {
             tip.postValue(
-                    new Pair<>(TipType.SUCCESS, "add friend success")
+                    new Pair<>(TipType.SUCCESS, "request friend success")
             );
         } else {
             tip.postValue(

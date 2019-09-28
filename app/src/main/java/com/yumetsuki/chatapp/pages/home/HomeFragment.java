@@ -118,9 +118,9 @@ public class HomeFragment extends Fragment {
     public void onMOpenAddFriendBtnClick() {
         View view = View.inflate(getContext(), R.layout.dialog_add_friend, null);
         new AlertDialog.Builder(Objects.requireNonNull(getContext()))
-                .setTitle("添加好友")
+                .setTitle("Request Friend")
                 .setView(view)
-                .setPositiveButton("确认", (dialogInterface, i) -> {
+                .setPositiveButton("confirm", (dialogInterface, i) -> {
                     TextInputEditText editText = view.findViewById(R.id.add_friend_edit);
                     if (editText.getText() != null && !editText.getText().toString().isEmpty()) {
                         viewModel.addFriend(editText.getText().toString());

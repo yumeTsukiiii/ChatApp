@@ -133,6 +133,7 @@ public class ChatFragment extends Fragment {
     public void onMSendMessageBtnClick() {
         if (mSendMessageEdit.getText() == null || mSendMessageEdit.getText().toString().isEmpty()) return;
         viewModel.sendMessage(mSendMessageEdit.getText().toString());
+        mChatMessageRecyclerView.scrollToPosition(Objects.requireNonNull(viewModel.getMessages().getValue()).size() - 1);
         mSendMessageEdit.setText("");
     }
 }
