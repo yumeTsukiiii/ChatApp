@@ -6,6 +6,8 @@ public class LoginReq {
 
     private String password;
 
+    private String public_key;
+
     public String getUsername() {
         return username;
     }
@@ -22,4 +24,11 @@ public class LoginReq {
         this.password = password;
     }
 
+    public String getPublic_key() {
+        return public_key;
+    }
+
+    public void setPublic_key(String public_key) {
+        this.public_key = public_key;
+    }
 }

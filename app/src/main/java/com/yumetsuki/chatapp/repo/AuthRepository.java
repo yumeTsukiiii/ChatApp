@@ -11,6 +11,7 @@ import com.yumetsuki.chatapp.net.protocol.req.LoginReq;
 import com.yumetsuki.chatapp.net.protocol.req.RegisterReq;
 import com.yumetsuki.chatapp.net.protocol.resp.LoginMessage;
 import com.yumetsuki.chatapp.net.protocol.resp.RegisterMessage;
+import com.yumetsuki.chatapp.utils.EncryptionUtils;
 
 import io.reactivex.Observable;
 import retrofit2.HttpException;
@@ -35,6 +36,7 @@ public class AuthRepository {
         LoginReq req = new LoginReq();
         req.setUsername(username);
         req.setPassword(password);
+        req.setPublic_key(EncryptionUtils.generatePublicKey());
         return authService.login(req).map(response -> {
             if (response.code() != 200) {
                 throw new HttpException(response);

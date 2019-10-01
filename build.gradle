@@ -5,9 +5,12 @@ buildscript {
     ext.retrofit_version = "2.6.2"
 
     repositories {
-        google()
-        mavenCentral()
-        jcenter()
+        maven{
+            url 'https://maven.aliyun.com/nexus/content/repositories/google'
+        }
+        maven{
+            url 'https://maven.aliyun.com/nexus/content/groups/public'
+        }
         
     }
     dependencies {
@@ -20,8 +23,12 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
+        maven{
+            url 'https://maven.aliyun.com/nexus/content/repositories/google'
+        }
+        maven{
+            url 'https://maven.aliyun.com/nexus/content/groups/public'
+        }
         
     }
 }

@@ -114,6 +114,9 @@ public class ChatFragment extends Fragment {
         });
 
         mainViewModel.getFriendsMessage().observe(this, friendMessages -> {
+            if (friendMessages.get(viewModel.getCurrentChatUsername()) == null){
+                return;
+            }
             viewModel.getMessages().setValue(friendMessages.get(viewModel.getCurrentChatUsername()));
         });
     }

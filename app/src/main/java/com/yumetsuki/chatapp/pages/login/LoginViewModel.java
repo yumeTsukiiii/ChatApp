@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.yumetsuki.chatapp.App;
 import com.yumetsuki.chatapp.repo.AuthRepository;
+import com.yumetsuki.chatapp.utils.EncryptionUtils;
 import com.yumetsuki.chatapp.utils.TipType;
 
 import java.util.ArrayList;
@@ -61,6 +62,7 @@ public class LoginViewModel extends ViewModel {
                                 .putString("cookie", response.headers().get("Set-Cookie"))
                                 .putString("username", username)
                                 .apply();
+                        EncryptionUtils.secretKey = EncryptionUtils.generateSecreteKey(response.body().getData().getPublic_key());
                         loginSuccess.postValue(true);
                         tip.postValue(
                                 new Pair<>(TipType.SUCCESS, "login success")
