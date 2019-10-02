@@ -150,6 +150,19 @@ public class MainViewModel extends ViewModel {
                 }
             });
             friendsMessage.postValue(friendsMessageValue);
+            List<Friend> friendsValue = friends.getValue();
+            if (friendsValue != null) {
+                friendsValue.forEach(friend -> {
+                    List<FriendMessage> messages = friendsMessageValue.get(friend.getName());
+                    if (messages != null) {
+                        if (messages.size() != 0) {
+                            FriendMessage message = messages.get(messages.size() - 1);
+                            friend.setRecentMessage(message.getContent());
+                            friend.setRecentMessageTime(message.getTime());
+                        }
+                    }
+                });
+            }
         } else {
             tip.postValue(
                     new Pair<>(TipType.ERROR, "get friends latest message error")
